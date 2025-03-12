@@ -31,6 +31,7 @@ public class TestUtilities {
 	public void createTweets(WebDriver driver) {
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+
 			// Open Twitter login page
 			driver.get("https://twitter.com/login");
 			driver.manage().window().maximize();
