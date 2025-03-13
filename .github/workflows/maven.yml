@@ -35,9 +35,6 @@ jobs:
         sudo mv chromedriver /usr/local/bin/
         chromedriver --version
 
-    - name: Set Up Virtual Display (Xvfb)
-      run: Xvfb :99 -ac &
-
     - name: Run Tests with Maven
       run: mvn clean test
       env:
