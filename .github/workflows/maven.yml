@@ -23,19 +23,5 @@ jobs:
           java-version: '17'
           cache: 'maven'
 
-      - name: Install Google Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-          echo "Chrome Installed: $(google-chrome --version)"
-
-      - name: Install ChromeDriver
-        run: |
-          CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
-          wget -N https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
-          unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/
-          echo "ChromeDriver Installed: $(chromedriver --version)"
-
       - name: Run tests with Maven
         run: mvn clean test
