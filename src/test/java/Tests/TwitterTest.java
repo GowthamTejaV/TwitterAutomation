@@ -1,5 +1,9 @@
 package Tests;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -16,20 +20,18 @@ public class TwitterTest {
 	public void initialiseDriver() {
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--headless=new");
-		options.addArguments("--disable-gpu");
-		options.addArguments("--window-size=1920,1080");
-		options.addArguments("--no-sandbox");
-		options.addArguments("--disable-dev-shm-usage");
-		options.addArguments("--disable-popup-blocking");
-		options.addArguments("--disable-extensions");
-		options.addArguments("--remote-allow-origins=*");
-		options.addArguments("--disable-background-networking");
-		options.addArguments("--disable-infobars");
-		options.addArguments("--user-data-dir=/tmp/chrome-user-data-" + System.currentTimeMillis());
-		options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+		options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
+
+		// Prevent detection
+		Map<String, Object> prefs = new HashMap<>();
+		prefs.put("credentials_enable_service", false);
+		prefs.put("profile.password_manager_enabled", false);
+		options.setExperimentalOption("prefs", prefs);
+		options.setExperimentalOption("excludeSwitches", Arrays.asList("enable-automation"));
 		options.setExperimentalOption("useAutomationExtension", false);
 
-		this.driver = new ChromeDriver(options);
+		driver = new ChromeDriver(options);
+	
 
 	}
 	
