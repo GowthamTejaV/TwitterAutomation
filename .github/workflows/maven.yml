@@ -23,10 +23,10 @@ jobs:
           java-version: '17'
           cache: 'maven'
 
-      - name: Install Google Chrome
+      - name: Install Chrome & Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+          sudo apt-get install -y google-chrome-stable libgbm-dev libasound2 xvfb
           echo "Chrome Installed: $(google-chrome --version)"
 
       - name: Install ChromeDriver
@@ -38,4 +38,7 @@ jobs:
           echo "ChromeDriver Installed: $(chromedriver --version)"
 
       - name: Run tests with Maven
-        run: mvn clean test
+        run: |
+          export DISPLAY=:99
+          Xvfb :99 -screen 0 1920x1080x24 &
+          mvn clean test
