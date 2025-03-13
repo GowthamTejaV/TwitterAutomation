@@ -1,5 +1,6 @@
 package PageUtilities;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.Random;
 
@@ -10,7 +11,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class TestUtilities {
+public class TestUtilities{
 
 	public static String generateRandomString(int length) {
 		String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -55,8 +56,7 @@ public class TestUtilities {
 			loginButton.click();
 
 			// Wait for tweet box and enter text
-			WebElement tweetBox = wait.until(ExpectedConditions
-					.elementToBeClickable(By.xpath("(.//div[@data-offset-key and @data-editor])[1]")));
+			WebElement tweetBox = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(.//div[@data-offset-key and @data-editor])[1]")));
 			tweetBox.sendKeys(" #ChildAbuserYSRCP " + TestUtilities.generateRandomString(4));
 
 			// Click Tweet button
@@ -64,7 +64,7 @@ public class TestUtilities {
 					.until(ExpectedConditions.elementToBeClickable(By.xpath("(.//span[@class and text()='Post'])[2]")));
 			tweetButton.click();
 
-			for (int i = 0; i <= 5; i++) {
+			for (int i = 0; i <5; i++) {
 				// Wait for tweet box and enter text
 				Thread.sleep(3000);
 				WebElement tweetBox2 = wait.until(ExpectedConditions
@@ -76,8 +76,8 @@ public class TestUtilities {
 				// Locate the file input element
 				WebElement uploadElement = driver.findElement(By.xpath("//input[@type='file']"));
 				// Provide the file path (Use absolute path for Mac)
-				String filePath = "/Users/gowthamtejavuppalapati/Desktop/PX.jpeg"; // Change this path
-				uploadElement.sendKeys(filePath.replace("X", TestUtilities.getRandonNumber()));
+				String filePath = new File("src/test/resources/Files/P?.jpeg").getAbsolutePath();// Change this path
+				uploadElement.sendKeys(filePath.replace("?", TestUtilities.getRandonNumber()));
 				// Click Tweet button
 				Thread.sleep(3000);
 				WebElement tweetButton3 = wait.until(
