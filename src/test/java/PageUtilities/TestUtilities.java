@@ -1,6 +1,8 @@
 package PageUtilities;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.By;
@@ -92,4 +94,31 @@ public class TestUtilities {
 		}
 	}
 
+	public void searchForVegetables(WebDriver driver) {
+		driver.navigate().to("https://rahulshettyacademy.com/seleniumPractise/#/");
+		waitUntilvisibilityOfElementLocated(driver, By.cssSelector(".search-keyword")).sendKeys("CA");
+
+		List<WebElement> lstEles = waitUntilvisibilityOfAllElements(driver,
+				driver.findElements(By.xpath(".//div[@class='products']/div[@class='product']/descendant::button")));
+		lstEles.stream().forEach(x -> x.click());
+
+		waitUntilvisibilityOfElementLocated(driver, By.linkText("Top Deals")).click();
+
+		List<String> winds = new ArrayList<String>(driver.getWindowHandles());
+		driver.switchTo().window(winds.get(1));
+		waitUntilvisibilityOfElementLocated(driver, By.xpath(".//a[@aria-label='Next']")).click();
+		// driver.switchTo().window(winds.get(0));
+		System.out.println("EXECUTED SUCCESSFULLY");
+
+	}
+
+	public WebElement waitUntilvisibilityOfElementLocated(WebDriver driver, By by) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		return wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+	}
+
+	public List<WebElement> waitUntilvisibilityOfAllElements(WebDriver driver, List<WebElement> lstEles) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		return wait.until(ExpectedConditions.visibilityOfAllElements(lstEles));
+	}
 }

@@ -15,7 +15,7 @@ public class TwitterTest {
 	@BeforeTest
 	public void initialiseDriver() {
 		ChromeOptions options = new ChromeOptions();
-//		options.addArguments("--headless=new");  // Use the new headless mode
+		options.addArguments("--headless=new");  // Use the new headless mode
 		options.addArguments("--disable-gpu");
 		options.addArguments("--window-size=1920,1080"); // Ensure UI elements are visible
 		options.addArguments("--no-sandbox");
@@ -29,7 +29,7 @@ public class TwitterTest {
 	@Test
 	public void verifyTwitterTest() {
 		TestUtilities testUtil=new TestUtilities();
-		testUtil.createTweets(driver);
+		testUtil.searchForVegetables(driver);
 	}
 	
 	@AfterTest
