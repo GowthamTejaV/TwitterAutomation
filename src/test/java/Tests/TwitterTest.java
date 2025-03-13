@@ -15,6 +15,7 @@ public class TwitterTest {
 	@BeforeTest
 	public void initialiseDriver() {
 		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--headless=new");
 		options.addArguments("--disable-gpu");
 		options.addArguments("--window-size=1920,1080");
 		options.addArguments("--no-sandbox");
@@ -22,10 +23,12 @@ public class TwitterTest {
 		options.addArguments("--disable-popup-blocking");
 		options.addArguments("--disable-extensions");
 		options.addArguments("--remote-allow-origins=*");
+		options.addArguments("--disable-background-networking");
+		options.addArguments("--disable-infobars");
 		options.addArguments("--user-data-dir=/tmp/chrome-user-data-" + System.currentTimeMillis());
 		options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
 		options.setExperimentalOption("useAutomationExtension", false);
-		
+
 		this.driver = new ChromeDriver(options);
 
 	}
